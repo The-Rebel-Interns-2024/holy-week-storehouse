@@ -5,6 +5,8 @@ import com.serbatic.holyweekstorehouse.data.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.Random;
 
@@ -29,5 +31,14 @@ public class ProductServiceImpl implements ProductService {
         product.setName(name);
         product.setCode(code);
         return proRep.save(product);
+    }
+
+    @Override
+    public List<Product> findAll() {
+        if(proRep.findAll().isEmpty()){
+            return  proRep.findAll();
+        } else{
+            throw new NoSuchElementException("The list of products is empty");
+        }
     }
 }
