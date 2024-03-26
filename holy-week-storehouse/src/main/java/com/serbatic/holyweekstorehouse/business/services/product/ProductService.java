@@ -7,4 +7,6 @@ import java.util.List;
 public interface ProductService {
     Product save(String name);
     List<Product> findAll();
+    Product findByCode(String code);
+
 }

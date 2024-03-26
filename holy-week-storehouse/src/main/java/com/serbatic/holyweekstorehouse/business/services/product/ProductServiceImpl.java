@@ -41,4 +41,13 @@ public class ProductServiceImpl implements ProductService {
             throw new NoSuchElementException("The list of products is empty");
         }
     }
+
+    @Override
+    public Product findByCode(String code) {
+        Optional<Product> products = proRep.findByCode(code);
+        if(products.isEmpty()){
+            throw new NoSuchElementException("The product don´t exist");
+        }
+        return products.get();
+    }
 }
