@@ -18,11 +18,9 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product save(String name) {
-        Optional<Product> productOpt = proRep.findByName(name);
-        if (productOpt.isPresent()) {
-            throw new IllegalArgumentException("Product with that name already exist");
-        }
+
         String code = "";
+        Optional<Product> productOpt = proRep.findByCode(code);
         do {
             code = name.substring(1, 4).toUpperCase() + "-" + r.nextInt(100, 1000);
             productOpt = proRep.findByCode(code);

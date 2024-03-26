@@ -4,12 +4,10 @@ import com.serbatic.holyweekstorehouse.data.entities.ProductEntry;
 
 import java.util.List;
 
-import com.serbatic.holyweekstorehouse.data.entities.Product;
-import com.serbatic.holyweekstorehouse.data.entities.ProductEntry;
-import com.serbatic.holyweekstorehouse.presentation.Dto.ProductRequest;
+import com.serbatic.holyweekstorehouse.presentation.Dto.ProductResource;
 
 public interface ProductEntryService {
-    ProductEntry save(ProductRequest prodReq);
+    ProductEntry save(ProductResource prodReq);
 
     List<ProductEntry> findAllEntries();
 }

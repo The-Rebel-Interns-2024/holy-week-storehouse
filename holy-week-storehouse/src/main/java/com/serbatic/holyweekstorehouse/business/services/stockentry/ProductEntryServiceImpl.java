@@ -4,7 +4,7 @@ import com.serbatic.holyweekstorehouse.data.entities.Product;
 import com.serbatic.holyweekstorehouse.data.entities.ProductEntry;
 import com.serbatic.holyweekstorehouse.data.repositories.ProductEntryRepository;
 import com.serbatic.holyweekstorehouse.data.repositories.ProductRepository;
-import com.serbatic.holyweekstorehouse.presentation.Dto.ProductRequest;
+import com.serbatic.holyweekstorehouse.presentation.Dto.ProductResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,8 +26,8 @@ public class ProductEntryServiceImpl implements ProductEntryService {
     }
 
     @Override
-    public ProductEntry save(ProductRequest prodReq) {
-        Optional<Product> productOpt = proRep.findByName(prodReq.getName());
+    public ProductEntry save(ProductResource prodReq) {
+        Optional<Product> productOpt = proRep.findByName(prodReq.getCode());
         if(productOpt.isPresent()){
             if(prodReq.getQuantity() > 0){
                 Product product = productOpt.get();
@@ -41,7 +41,7 @@ public class ProductEntryServiceImpl implements ProductEntryService {
             }
 
         } else{
-            throw new IllegalArgumentException("The product with name: "+prodReq.getName()+" does not exist");
+            throw new IllegalArgumentException("The product with name: "+prodReq.getCode()+" does not exist");
         }
 
     }

@@ -1,5 +1,6 @@
 package com.serbatic.holyweekstorehouse.data.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -17,10 +18,12 @@ public class Product {
     @Column(name="name")
     private String name;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<ProductEntry> productEntryList;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<ProductExit> productExitList;
 
     public Long getId() {
