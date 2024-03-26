@@ -24,8 +24,8 @@ public class ProductController {
         return ResponseEntity.ok(productService.findAll());
     }
 
-    @GetMapping()
-    public ResponseEntity<Product> findProductByCode(@PathVariable String code) {
+    @GetMapping("/{code}")
+    public ResponseEntity<Product> findProductByCode(@PathVariable(name = "code") String code) {
         return ResponseEntity.ok(productService.findByCode(code));
     }
 
