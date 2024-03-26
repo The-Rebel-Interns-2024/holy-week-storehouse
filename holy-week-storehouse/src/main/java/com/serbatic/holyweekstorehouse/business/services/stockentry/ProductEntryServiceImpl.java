@@ -11,12 +11,20 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.Optional;
 
+import java.util.List;
+
 @Service
 public class ProductEntryServiceImpl implements ProductEntryService {
+
     @Autowired
-    ProductEntryRepository proEntryRep;
+    ProductEntryRepository entryRep;
+
     @Autowired
     ProductRepository proRep;
+    public List<ProductEntry> findAllEntries() {
+        return entryRep.findAll();
+    }
+
     @Override
     public ProductEntry save(ProductRequest prodReq) {
         Optional<Product> productOpt = proRep.findByName(prodReq.getName());
@@ -27,7 +35,7 @@ public class ProductEntryServiceImpl implements ProductEntryService {
                 proEntry.setEntryDate(LocalDate.now());
                 proEntry.setProductCode(product);
                 proEntry.setQuantity(Long.valueOf(prodReq.getQuantity()));
-                return proEntryRep.save(proEntry);
+                return entryRep.save(proEntry);
             } else{
                 throw new IllegalArgumentException("The product quantity is not valid.");
             }
