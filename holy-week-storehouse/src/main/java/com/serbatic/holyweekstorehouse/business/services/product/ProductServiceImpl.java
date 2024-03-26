@@ -35,7 +35,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<Product> findAll() {
-        if(proRep.findAll().isEmpty()){
+        if(!proRep.findAll().isEmpty()){
             return  proRep.findAll();
         } else{
             throw new NoSuchElementException("The list of products is empty");

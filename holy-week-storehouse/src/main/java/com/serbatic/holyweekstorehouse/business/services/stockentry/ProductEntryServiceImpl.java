@@ -1,7 +1,40 @@
 package com.serbatic.holyweekstorehouse.business.services.stockentry;
 
+import com.serbatic.holyweekstorehouse.data.entities.Product;
+import com.serbatic.holyweekstorehouse.data.entities.ProductEntry;
+import com.serbatic.holyweekstorehouse.data.repositories.ProductEntryRepository;
+import com.serbatic.holyweekstorehouse.data.repositories.ProductRepository;
+import com.serbatic.holyweekstorehouse.presentation.Dto.ProductRequest;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
+import java.util.Optional;
 
 @Service
 public class ProductEntryServiceImpl implements ProductEntryService {
+    @Autowired
+    ProductEntryRepository proEntryRep;
+    @Autowired
+    ProductRepository proRep;
+    @Override
+    public ProductEntry save(ProductRequest prodReq) {
+        Optional<Product> productOpt = proRep.findByName(prodReq.getName());
+        if(productOpt.isPresent()){
+            if(prodReq.getQuantity() > 0){
+                Product product = productOpt.get();
+                ProductEntry proEntry = new ProductEntry();
+                proEntry.setEntryDate(LocalDate.now());
+                proEntry.setProductCode(product);
+                proEntry.setQuantity(Long.valueOf(prodReq.getQuantity()));
+                return proEntryRep.save(proEntry);
+            } else{
+                throw new IllegalArgumentException("The product quantity is not valid.");
+            }
+
+        } else{
+            throw new IllegalArgumentException("The product with name: "+prodReq.getName()+" does not exist");
+        }
+
+    }
 }
