@@ -63,6 +63,7 @@ public class ProductExitServiceImpl implements ProductExitService {
                     productExitNew.setProductCode(product);
                     productExitNew.setQuantity(Long.valueOf(productResource.getQuantity()));
                     exitRep.save(productExitNew);
+                    productExitNew.getProductCode().getProductExitList().add(productExitNew);
                     return productResource;
 
                 } else {
