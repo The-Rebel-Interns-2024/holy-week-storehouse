@@ -1,5 +1,7 @@
 package com.serbatic.holyweekstorehouse.presentation.Dto;
 
+import com.serbatic.holyweekstorehouse.data.entities.Product;
+
 public class ProductStorageResource {
     String code;
     String name;
@@ -7,6 +9,11 @@ public class ProductStorageResource {
     public ProductStorageResource(String code, String name) {
         this.code = code;
         this.name = name;
+    }
+
+    public static ProductStorageResource productStorageResourceMapping(Product product) {
+        ProductStorageResource productStorageResource = new ProductStorageResource(product.getCode(), product.getName());
+        return productStorageResource;
     }
 
     public String getCode() {

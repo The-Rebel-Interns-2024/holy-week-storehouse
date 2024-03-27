@@ -18,8 +18,7 @@ public class ProductController {
     @PostMapping()
     public ResponseEntity<ProductStorageResource> createProduct(@RequestBody ProductStorageResource productStorageResource) {
         Product product = productService.save(productStorageResource);
-        ProductStorageResource productResponse = new ProductStorageResource(product.getCode(), product.getName());
-        return ResponseEntity.ok(productResponse);
+        return ResponseEntity.ok(ProductStorageResource.productStorageResourceMapping(product));
     }
 
     @GetMapping()
