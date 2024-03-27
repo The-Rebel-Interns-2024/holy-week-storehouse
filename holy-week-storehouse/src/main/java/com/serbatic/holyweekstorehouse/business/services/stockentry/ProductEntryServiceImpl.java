@@ -4,7 +4,7 @@ import com.serbatic.holyweekstorehouse.data.entities.Product;
 import com.serbatic.holyweekstorehouse.data.entities.ProductEntry;
 import com.serbatic.holyweekstorehouse.data.repositories.ProductEntryRepository;
 import com.serbatic.holyweekstorehouse.data.repositories.ProductRepository;
-import com.serbatic.holyweekstorehouse.presentation.Dto.ProductResource;
+import com.serbatic.holyweekstorehouse.presentation.Dto.ProductRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,23 +26,22 @@ public class ProductEntryServiceImpl implements ProductEntryService {
     }
 
     @Override
-    public ProductEntry save(ProductResource prodReq) {
-        Optional<Product> productOpt = proRep.findByName(prodReq.getCode());
+    public ProductEntry save(String code, Long quantity) {
+        Optional<Product> productOpt = proRep.findByCode(code);
         if(productOpt.isPresent()){
-            if(prodReq.getQuantity() > 0){
+            if(quantity > 0){
                 Product product = productOpt.get();
                 ProductEntry proEntry = new ProductEntry();
                 proEntry.setEntryDate(LocalDate.now());
                 proEntry.setProductCode(product);
-                proEntry.setQuantity(Long.valueOf(prodReq.getQuantity()));
+                proEntry.setQuantity(quantity);
                 return entryRep.save(proEntry);
             } else{
                 throw new IllegalArgumentException("The product quantity is not valid.");
             }
 
         } else{
-            throw new IllegalArgumentException("The product with name: "+prodReq.getCode()+" does not exist");
+            throw new IllegalArgumentException("The product with code: "+code+" does not exist");
         }
-
     }
 }

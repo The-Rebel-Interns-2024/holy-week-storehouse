@@ -12,7 +12,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/exits")
 public class ProductExitController {
-
+    //Todo hacer metodo de validacion en en controlador si es lo que llega de front
     @Autowired
     ProductExitService productExitService;
 
@@ -22,7 +22,7 @@ public class ProductExitController {
     }
 
     @PostMapping()
-    public ResponseEntity<ProductExit> createProduct(@RequestBody ProductResource prodRequest) {
+    public ResponseEntity<ProductExit> createProductExit(@RequestBody ProductResource prodRequest) {
         return ResponseEntity.ok(productExitService.save(prodRequest));
     }
 }

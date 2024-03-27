@@ -2,6 +2,7 @@ package com.serbatic.holyweekstorehouse.presentation.controllers;
 
 import com.serbatic.holyweekstorehouse.business.services.product.ProductService;
 import com.serbatic.holyweekstorehouse.data.entities.Product;
+import com.serbatic.holyweekstorehouse.presentation.Dto.ProductStorageResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,8 +16,10 @@ public class ProductController {
     ProductService productService;
 
     @PostMapping()
-    public ResponseEntity<Product> createProduct(@RequestBody String name) {
-        return ResponseEntity.ok(productService.save(name));
+    public ResponseEntity<ProductStorageResource> createProduct(@RequestBody ProductStorageResource productStorageResource) {
+        Product product = productService.save(productStorageResource);
+        ProductStorageResource productResponse = new ProductStorageResource(product.getCode(), product.getName());
+        return ResponseEntity.ok(productResponse);
     }
 
     @GetMapping()

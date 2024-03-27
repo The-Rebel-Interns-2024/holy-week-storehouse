@@ -28,8 +28,8 @@ public class ProductExitServiceImpl implements ProductExitService {
     @Override
     public ProductExit save(ProductResource productResource) {
 
-        float quantityEntry=0;
-        float quantityExist=0;
+        Long quantityEntry=0l;
+        Long quantityExist=0l;
 
         Product product = productRepository.findByCode(productResource.getCode()).get();
         productRepository.findByCode(productResource.getCode());

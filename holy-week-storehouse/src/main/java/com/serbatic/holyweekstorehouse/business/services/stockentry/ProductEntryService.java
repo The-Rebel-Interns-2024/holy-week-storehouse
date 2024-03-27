@@ -1,13 +1,14 @@
 package com.serbatic.holyweekstorehouse.business.services.stockentry;
 
 import com.serbatic.holyweekstorehouse.data.entities.ProductEntry;
+import com.serbatic.holyweekstorehouse.presentation.Dto.ProductResource;
 
 import java.util.List;
 
-import com.serbatic.holyweekstorehouse.presentation.Dto.ProductResource;
-
 public interface ProductEntryService {
-    ProductEntry save(ProductResource prodReq);
+
+    //ProductEntry save(ProductResource prodReq);
+    ProductEntry save(String code, Long quantity);
 
     List<ProductEntry> findAllEntries();
 }
