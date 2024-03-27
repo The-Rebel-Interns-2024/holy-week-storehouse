@@ -4,7 +4,6 @@ import com.serbatic.holyweekstorehouse.data.entities.Product;
 import com.serbatic.holyweekstorehouse.data.entities.ProductEntry;
 import com.serbatic.holyweekstorehouse.data.repositories.ProductEntryRepository;
 import com.serbatic.holyweekstorehouse.data.repositories.ProductRepository;
-import com.serbatic.holyweekstorehouse.presentation.Dto.ProductRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
