@@ -43,4 +43,26 @@ public class ProductEntryServiceImpl implements ProductEntryService {
             throw new IllegalArgumentException("The product with code: "+code+" does not exist");
         }
     }
+
+
+    /*@Override
+    public ProductEntry save(ProductResource prodReq) {
+        Optional<Product> productOpt = proRep.findByCode(prodReq.getCode());
+        if(productOpt.isPresent()){
+            if(prodReq.getQuantity() > 0){
+                Product product = productOpt.get();
+                ProductEntry proEntry = new ProductEntry();
+                proEntry.setEntryDate(LocalDate.now());
+                proEntry.setProductCode(product);
+                proEntry.setQuantity(Long.valueOf(prodReq.getQuantity()));
+                return entryRep.save(proEntry);
+            } else{
+                throw new IllegalArgumentException("The product quantity is not valid.");
+            }
+
+        } else{
+            throw new IllegalArgumentException("The product with code: "+prodReq.getCode()+" does not exist");
+        }
+
+    }*/
 }
