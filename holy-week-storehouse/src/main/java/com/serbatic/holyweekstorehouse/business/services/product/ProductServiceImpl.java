@@ -13,9 +13,12 @@ import java.util.Random;
 
 @Service
 public class ProductServiceImpl implements ProductService {
-    @Autowired
-    ProductRepository proRep;
-    Random r = new Random();
+
+    private final ProductRepository proRep;
+
+    public ProductServiceImpl(ProductRepository proRep) {
+        this.proRep = proRep;
+    }
 
     @Override
     public Product save(ProductStorageResource productStorageResource) {

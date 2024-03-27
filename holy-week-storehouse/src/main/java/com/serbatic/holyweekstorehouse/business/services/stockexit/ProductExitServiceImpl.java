@@ -15,11 +15,16 @@ import java.util.NoSuchElementException;
 
 @Service
 public class ProductExitServiceImpl implements ProductExitService {
-    @Autowired
-    ProductExitRepository exitRep;
 
-    @Autowired
-    ProductRepository productRepository;
+    private final ProductExitRepository exitRep;
+
+
+    private final ProductRepository productRepository;
+
+    public ProductExitServiceImpl(ProductExitRepository exitRep, ProductRepository productRepository) {
+        this.exitRep = exitRep;
+        this.productRepository = productRepository;
+    }
 
     @Override
     public List<ProductExit> findAllExits() {

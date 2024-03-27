@@ -19,11 +19,9 @@ public class Product {
     private String name;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JsonIgnore
     private List<ProductEntry> productEntryList;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JsonIgnore
     private List<ProductExit> productExitList;
 
     public Long getId() {
