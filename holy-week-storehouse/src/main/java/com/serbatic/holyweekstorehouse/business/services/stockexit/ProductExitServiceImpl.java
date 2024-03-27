@@ -27,7 +27,7 @@ public class ProductExitServiceImpl implements ProductExitService {
     }
 
     @Override
-    public ProductExit save(ProductResource productResource) {
+    public ProductResource save(ProductResource productResource) {
 
         Long quantityEntry = 0l;
         Long quantityExist = 0l;
@@ -61,7 +61,8 @@ public class ProductExitServiceImpl implements ProductExitService {
                     productExitNew.setExitDate(LocalDate.now());
                     productExitNew.setProductCode(product);
                     productExitNew.setQuantity(Long.valueOf(productResource.getQuantity()));
-                    return exitRep.save(productExitNew);
+                    exitRep.save(productExitNew);
+                    return productResource;
 
                 } else {
                     throw new IllegalArgumentException("The product with the code: " + product.getCode() + ", does not have enough stock for that quantity. ");

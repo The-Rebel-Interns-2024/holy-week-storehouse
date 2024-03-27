@@ -9,5 +9,5 @@ public interface ProductExitService {
 
     List<ProductExit> findAllExits();
 
-    ProductExit save(ProductResource productResource);
+    ProductResource save(ProductResource productResource);
 }

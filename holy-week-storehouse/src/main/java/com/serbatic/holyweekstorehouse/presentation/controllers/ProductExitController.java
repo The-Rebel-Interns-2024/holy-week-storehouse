@@ -22,7 +22,7 @@ public class ProductExitController {
     }
 
     @PostMapping()
-    public ResponseEntity<ProductExit> createProductExit(@RequestBody ProductResource prodRequest) {
+    public ResponseEntity<ProductResource> createProductExit(@RequestBody ProductResource prodRequest) {
         return ResponseEntity.ok(productExitService.save(prodRequest));
     }
 }
