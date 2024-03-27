@@ -36,6 +36,7 @@ public class ProductEntryServiceImpl implements ProductEntryService {
                 proEntry.setEntryDate(LocalDate.now());
                 proEntry.setProductCode(product);
                 proEntry.setQuantity(Long.valueOf(prodReq.getQuantity()));
+                proEntry.getProductCode().getProductEntryList().add(proEntry);
                 return entryRep.save(proEntry);
 
         } else{
