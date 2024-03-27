@@ -32,7 +32,7 @@ public class ProductExitServiceImpl implements ProductExitService {
         float quantityExist=0;
 
         Product product = productRepository.findByCode(productResource.getCode()).get();
-
+        productRepository.findByCode(productResource.getCode());
 
         if (product.getProductEntryList().isEmpty()){
 

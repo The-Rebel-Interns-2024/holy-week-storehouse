@@ -9,4 +9,6 @@ public interface ProductService {
     List<Product> findAll();
     Product findByCode(String code);
 
+    Boolean existByCode(String code);
+
 }
