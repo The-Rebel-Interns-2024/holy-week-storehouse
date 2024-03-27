@@ -18,8 +18,12 @@ public class ProductEntryServiceImpl implements ProductEntryService {
 
     @Autowired
     ProductEntryRepository entryRep;
+  
     @Autowired
     ProductRepository proRep;
+    public List<ProductEntry> findAllEntries() {
+        return entryRep.findAll();
+    }
 
     @Override
     public ProductEntry save(String code, Long quantity) {

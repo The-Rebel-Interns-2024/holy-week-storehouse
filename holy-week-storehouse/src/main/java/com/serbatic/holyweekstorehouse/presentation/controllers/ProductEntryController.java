@@ -13,8 +13,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/entries")
 public class ProductEntryController {
+  
     @Autowired
-
     ProductEntryService productEntryService;
 
     @GetMapping()
