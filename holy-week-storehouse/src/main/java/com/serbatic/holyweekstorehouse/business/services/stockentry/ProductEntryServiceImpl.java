@@ -45,9 +45,6 @@ public class ProductEntryServiceImpl implements ProductEntryService {
         }
     }
 
-    public List<ProductEntry> findAllEntries() {
-        return entryRep.findAll();
-    }
 
     /*@Override
     public ProductEntry save(ProductResource prodReq) {
