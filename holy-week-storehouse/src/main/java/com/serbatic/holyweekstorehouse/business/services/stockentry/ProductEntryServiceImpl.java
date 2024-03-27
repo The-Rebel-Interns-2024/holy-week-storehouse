@@ -18,11 +18,15 @@ import java.util.List;
 @Service
 public class ProductEntryServiceImpl implements ProductEntryService {
 
-    @Autowired
     ProductEntryRepository entryRep;
 
-    @Autowired
     ProductRepository proRep;
+
+    public ProductEntryServiceImpl(ProductEntryRepository entryRep, ProductRepository proRep) {
+        this.entryRep = entryRep;
+        this.proRep = proRep;
+    }
+
     public List<ProductEntry> findAllEntries() {
         return entryRep.findAll();
     }
