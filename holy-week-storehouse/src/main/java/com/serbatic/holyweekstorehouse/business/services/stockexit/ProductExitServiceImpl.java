@@ -1,19 +1,83 @@
 package com.serbatic.holyweekstorehouse.business.services.stockexit;
 
+import com.serbatic.holyweekstorehouse.data.entities.Product;
+import com.serbatic.holyweekstorehouse.data.entities.ProductEntry;
 import com.serbatic.holyweekstorehouse.data.entities.ProductExit;
 import com.serbatic.holyweekstorehouse.data.repositories.ProductExitRepository;
+import com.serbatic.holyweekstorehouse.data.repositories.ProductRepository;
+import com.serbatic.holyweekstorehouse.presentation.Dto.ProductResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 public class ProductExitServiceImpl implements ProductExitService {
-    @Autowired
-    ProductExitRepository exitRep;
+
+    private final ProductExitRepository exitRep;
+
+
+    private final ProductRepository productRepository;
+
+    public ProductExitServiceImpl(ProductExitRepository exitRep, ProductRepository productRepository) {
+        this.exitRep = exitRep;
+        this.productRepository = productRepository;
+    }
 
     @Override
     public List<ProductExit> findAllExits() {
         return exitRep.findAll();
+    }
+
+    @Override
+    public ProductResource save(ProductResource productResource) {
+
+        Long quantityEntry = 0l;
+        Long quantityExist = 0l;
+
+        Product product;
+
+        if (productRepository.existsByCode(productResource.getCode())) {
+
+            product = productRepository.findByCode(productResource.getCode()).get();
+
+            if (product.getProductEntryList().isEmpty()) {
+
+                throw new IllegalArgumentException("The product with code: " + product.getCode() + " has no entries made ");
+
+            } else {
+
+                for (ProductEntry prodEnt : product.getProductEntryList()) {
+                    quantityEntry += prodEnt.getQuantity();
+                    System.out.println(quantityEntry);
+                }
+
+                if (!product.getProductExitList().isEmpty()) {
+
+                    for (ProductExit prodExit : product.getProductExitList()) {
+                        quantityExist += prodExit.getQuantity();
+                    }
+                }
+
+                if (quantityEntry - quantityExist > productResource.getQuantity()) {
+
+                    ProductExit productExitNew = new ProductExit();
+                    productExitNew.setExitDate(LocalDate.now());
+                    productExitNew.setProductCode(product);
+                    productExitNew.setQuantity(Long.valueOf(productResource.getQuantity()));
+                    exitRep.save(productExitNew);
+                    productExitNew.getProductCode().getProductExitList().add(productExitNew);
+                    return productResource;
+
+                } else {
+                    throw new IllegalArgumentException("The product with the code: " + product.getCode() + ", does not have enough stock for that quantity. ");
+                }
+            }
+
+        } else {
+            throw  new NoSuchElementException("The product with the code:" + productResource.getCode() +", no exist");
+        }
     }
 }
