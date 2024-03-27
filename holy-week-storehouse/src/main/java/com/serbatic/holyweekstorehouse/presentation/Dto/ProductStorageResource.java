@@ -11,7 +11,7 @@ public class ProductStorageResource {
         this.name = name;
     }
 
-    public static ProductStorageResource productStorageResourceMapping(Product product) {
+    public static ProductStorageResource mapToProductStorageResource(Product product) {
         ProductStorageResource productStorageResource = new ProductStorageResource(product.getCode(), product.getName());
         return productStorageResource;
     }
