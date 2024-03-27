@@ -11,4 +11,5 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     Boolean existsByCode(String code);
 
     Optional<Product> findByName(String name);
+
 }

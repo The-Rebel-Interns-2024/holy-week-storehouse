@@ -6,7 +6,7 @@ import com.serbatic.holyweekstorehouse.presentation.Dto.ProductResource;
 import java.util.List;
 
 public interface ProductEntryService {
-  
+
     //ProductEntry save(ProductResource prodReq);
     ProductEntry save(String code, Long quantity);
 

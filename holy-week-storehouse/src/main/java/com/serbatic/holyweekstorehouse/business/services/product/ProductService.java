@@ -8,4 +8,8 @@ import java.util.List;
 public interface ProductService {
     Product save(ProductStorageResource product);
     List<Product> findAll();
+    Product findByCode(String code);
+
+
+
 }

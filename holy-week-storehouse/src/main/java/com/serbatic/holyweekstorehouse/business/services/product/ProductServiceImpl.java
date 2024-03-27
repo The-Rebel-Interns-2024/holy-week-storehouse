@@ -8,13 +8,17 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.Random;
 
 @Service
 public class ProductServiceImpl implements ProductService {
-    @Autowired
-    ProductRepository proRep;
-    Random r = new Random();
+
+    private final ProductRepository proRep;
+
+    public ProductServiceImpl(ProductRepository proRep) {
+        this.proRep = proRep;
+    }
 
     @Override
     public Product save(ProductStorageResource productStorageResource) {
@@ -34,5 +38,14 @@ public class ProductServiceImpl implements ProductService {
         } else {
             throw new NoSuchElementException("The list of products is empty");
         }
+    }
+
+    @Override
+    public Product findByCode(String code) {
+        Optional<Product> products = proRep.findByCode(code);
+        if(products.isEmpty()){
+            throw new NoSuchElementException("The product don´t exist");
+        }
+        return products.get();
     }
 }

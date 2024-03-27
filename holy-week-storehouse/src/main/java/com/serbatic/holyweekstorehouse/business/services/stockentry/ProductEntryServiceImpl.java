@@ -4,7 +4,6 @@ import com.serbatic.holyweekstorehouse.data.entities.Product;
 import com.serbatic.holyweekstorehouse.data.entities.ProductEntry;
 import com.serbatic.holyweekstorehouse.data.repositories.ProductEntryRepository;
 import com.serbatic.holyweekstorehouse.data.repositories.ProductRepository;
-import com.serbatic.holyweekstorehouse.presentation.Dto.ProductResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,11 +15,17 @@ import java.util.List;
 @Service
 public class ProductEntryServiceImpl implements ProductEntryService {
 
-    @Autowired
-    ProductEntryRepository entryRep;
-  
-    @Autowired
-    ProductRepository proRep;
+
+    private final ProductEntryRepository entryRep;
+
+
+    private final ProductRepository proRep;
+
+    public ProductEntryServiceImpl(ProductEntryRepository entryRep, ProductRepository proRep) {
+        this.entryRep = entryRep;
+        this.proRep = proRep;
+    }
+
     public List<ProductEntry> findAllEntries() {
         return entryRep.findAll();
     }
@@ -35,6 +40,7 @@ public class ProductEntryServiceImpl implements ProductEntryService {
                 proEntry.setEntryDate(LocalDate.now());
                 proEntry.setProductCode(product);
                 proEntry.setQuantity(quantity);
+                proEntry.getProductCode().getProductEntryList().add(proEntry);
                 return entryRep.save(proEntry);
             } else{
                 throw new IllegalArgumentException("The product quantity is not valid.");
