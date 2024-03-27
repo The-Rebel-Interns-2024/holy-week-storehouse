@@ -34,6 +34,7 @@ public class ProductEntryServiceImpl implements ProductEntryService {
                 proEntry.setEntryDate(LocalDate.now());
                 proEntry.setProductCode(product);
                 proEntry.setQuantity(quantity);
+                proEntry.getProductCode().getProductEntryList().add(proEntry);
                 return entryRep.save(proEntry);
             } else{
                 throw new IllegalArgumentException("The product quantity is not valid.");

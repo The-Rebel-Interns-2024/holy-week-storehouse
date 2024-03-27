@@ -34,7 +34,7 @@ public class ProductExitServiceImpl implements ProductExitService {
 
         Product product;
 
-        if (productRepository.existByCode(productResource.getCode())) {
+        if (productRepository.existsByCode(productResource.getCode())) {
 
             product = productRepository.findByCode(productResource.getCode()).get();
 
@@ -46,6 +46,7 @@ public class ProductExitServiceImpl implements ProductExitService {
 
                 for (ProductEntry prodEnt : product.getProductEntryList()) {
                     quantityEntry += prodEnt.getQuantity();
+                    System.out.println(quantityEntry);
                 }
 
                 if (!product.getProductExitList().isEmpty()) {
